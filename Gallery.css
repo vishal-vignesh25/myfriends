@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@400..700&family=Chonburi&family=Oswald:wght@200..700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Caveat', sans-serif;
+}
+
+body 
+{
+  height: 100vh;
+  background-color: #fff;
+  background-position: center;
+  background-size: cover;
+}
+
+li
+{
+  list-style: none;
+}
+
+.active{
+  color: rgb(242, 211, 11);
+  font-size: 1.1rem;
+}
+a
+{
+  text-decoration: none;
+  color: #000;
+  font-size: 1rem;
+  transition: .2s;
+}
+
+a:hover
+{
+  color: rgb(242, 211, 11);
+  font-size: 1.1rem;
+}
+
+header
+{
+  position: relative;
+  padding: 0 2rem;
+  background-color: #fff;
+}
+
+.navbar
+{
+  width: 102%;
+  height: 60px;
+  max-width: 1800px;
+  margin: 0 auto;
+  display: flex; 
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar .logo a
+{
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.navbar .links
+{
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  font-weight: bold;
+}
+
+.pics 
+ {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+  background-color: #fff;
+}
+
+.title{
+  text-align: center;
+  align-items: center;
+  margin-top: 5px;
+  display: inline-block;
+  font-size: 55px;
+}
+  
+/* Upload Section */
+#uploadSection { margin-bottom: 20px; }
+
+/* Masonry Grid */
+#gallery {
+  column-count: 4; /* Adjust the number of columns */
+  column-gap: 10px;
+}
+
+.gallery-item {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.gallery-img {
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+}
+
+/* Delete Button */
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  /* Remove display: none or change to display: block */
+  display: block;
+}
+
+
+.gallery-img:hover {
+  transform: scale(1.02)  ;
+}
+
+/* Lightbox Styling */
+#lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 5px;
+}
+
+.lightbox-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  color: #fff;
+}
+
+#prevBtn { left: 5%; }
+#nextBtn { right: 5%; }
+#closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) { #gallery { column-count: 3; } }
+@media (max-width: 800px) { #gallery { column-count: 2; } }
+@media (max-width: 500px) { #gallery { column-count: 1; } }
+
+.custom-file-button {
+  text-align: center;
+  background-color: rgb(242, 211, 11);
+  color: #000;
+  border: 2px solid  rgb(242, 211, 11);
+  border-radius: 30px;
+  padding: 8px;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+  font-size: 20px;
+  
+}
+
+.custom-file-button:hover {
+  background-color: #fff;
+  color: rgb(242, 211, 11);
+  cursor: pointer;
+}
+
+.upload{
+  text-align: center;
+  background-color: rgb(242, 211, 11);
+  color: black;
+  border: 2px solid  rgb(242, 211, 11);
+  border-radius: 30px;
+  padding: 8px;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+  margin-left: 580px;
+  font-size: 20px;
+}
+
+.upload:hover{
+  background-color: #fff;
+  color: rgb(242, 211, 11);
+  cursor: pointer;
+  transition: .3s ease-in-out;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
