@@ -1,11 +1,11 @@
+require('dotenv').config();
+
 const express = require("express");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-
-require('dotenv').config();
 
 // Load environment variables
 dotenv.config();
@@ -14,7 +14,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 console.log("MongoDB URI:", process.env.MONGO_URI);
-
 
 // ✅ MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
