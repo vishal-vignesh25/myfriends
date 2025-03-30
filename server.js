@@ -10,7 +10,7 @@ const dotenv = require("dotenv");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-console.log("MongoDB URI:", process.env.MONGO_URI);
+const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://pokemongo123vishal:S5mk5iWeVA5y4R0w@cluster0.xumptes.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" 
 
 // MongoDB Connection (Using Compass / Local MongoDB)
 mongoose.connect(process.env.MONGO_URI, {
