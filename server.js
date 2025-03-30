@@ -10,15 +10,19 @@ const dotenv = require("dotenv");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-console.log("MongoDB_URI:", process.env.MONGO_URI);
+const MONGO_URI ="mongodb+srv://pokemongo123vishal:S5mk5iWeVA5y4R0w@cluster0.xumptes.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
+// Ensure the URI is not undefined
 if (!MONGO_URI) {
     console.error("❌ ERROR: MONGO_URI is undefined!");
     process.exit(1);
   }
   
-  mongoose.connect(process.env.MONGO_URI, {
-    useUnifiedTopology: true, // Still recommended
+  console.log("🔍 Trying to connect to MongoDB...");
+  
+  mongoose.connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
     .then(() => console.log("✅ Connected to MongoDB! 🚀"))
     .catch((err) => console.error("❌ MongoDB Connection Error:", err.message));
