@@ -20,9 +20,7 @@ if (!MONGO_URI) {
   
   console.log("🔍 Trying to connect to MongoDB...");
   
-  mongoose.connect(MONGO_URI, {
-    useUnifiedTopology: true,
-  })
+  mongoose.connect(MONGO_URI)
     .then(() => console.log("✅ Connected to MongoDB! 🚀"))
     .catch((err) => console.error("❌ MongoDB Connection Error:", err.message));
 
