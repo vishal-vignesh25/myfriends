@@ -12,13 +12,16 @@ const PORT = process.env.PORT || 5000;
 
 console.log("MongoDB URI:", process.env.MONGO_URI);
 
-// MongoDB Connection (Using Compass / Local MongoDB)
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => console.log("✅ Connected to MongoDB!"))
-  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
+if (!MONGO_URI) {
+    console.error("❌ ERROR: MONGO_URI is undefined!");
+    process.exit(1);
+  }
+  
+  mongoose.connect(process.env.MONGO_URI, {
+    useUnifiedTopology: true, // Still recommended
+  })
+    .then(() => console.log("✅ Connected to MongoDB! 🚀"))
+    .catch((err) => console.error("❌ MongoDB Connection Error:", err.message));
 
 // ✅ Define Image Schema & Model
 const imageSchema = new mongoose.Schema({
