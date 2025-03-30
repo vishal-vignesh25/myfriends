@@ -10,7 +10,7 @@ const dotenv = require("dotenv");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-console.log("MongoDB URI:", process.env.MONGO_URI);
+console.log("MongoDB_URI:", process.env.MONGO_URI);
 
 if (!MONGO_URI) {
     console.error("❌ ERROR: MONGO_URI is undefined!");
