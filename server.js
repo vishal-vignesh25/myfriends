@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const streamifier = require("streamifier");
 const express = require("express");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
@@ -46,35 +47,44 @@ app.use(express.json());
 const storage = multer.memoryStorage(); // Store file in memory before uploading to Cloudinary
 const upload = multer({
     storage: multer.memoryStorage(),
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
-  });
+});
   
-
-// ✅ Upload Image & Store in MongoDB
 app.post("/upload", upload.single("image"), async (req, res) => {
-    try {
-      if (!req.file) return res.status(400).json({ success: false, message: "No image uploaded" });
-  
-      const result = await new Promise((resolve, reject) => {
-        const uploadStream = cloudinary.uploader.upload_stream(
-          { resource_type: "image" },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        );
-        uploadStream.end(req.file.buffer);
-      });
-  
-      const newImage = new Image({ url: result.secure_url });
-      await newImage.save();
-  
-      res.json({ success: true, imageUrl: result.secure_url });
-    } catch (error) {
-      console.error("Upload Error:", error);
-      res.status(500).json({ success: false, message: "Upload failed", error });
+  try {
+    console.log("REQ BODY:", req.body);
+    console.log("REQ FILE:", req.file);
+
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
     }
-  });
+
+    // Upload to Cloudinary
+    const uploadStream = cloudinary.uploader.upload_stream(
+      { resource_type: "image" },
+      async (error, cloudinaryResult) => {
+        if (error) {
+          console.error("❌ Cloudinary Upload Error:", error);
+          return res.status(500).json({ error: `Upload to Cloudinary failed: ${error.message}` });
+        }
+
+        // Save to MongoDB
+        try {
+          const newImage = new Image({ imageUrl: cloudinaryResult.secure_url });
+          await newImage.save();
+          res.json({ message: "✅ Image uploaded & saved in MongoDB", url: cloudinaryResult.secure_url });
+        } catch (mongoError) {
+          console.error("❌ MongoDB Save Error:", mongoError);
+          return res.status(500).json({ error: `MongoDB Save Error: ${mongoError.message}` });
+        }
+      }
+    );
+
+    streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
+  } catch (error) {
+    console.error("❌ Internal Error:", error);
+    res.status(500).json({ error: `Internal Error: ${error.message}` });
+  }
+});
 
 // ✅ Retrieve All Images from MongoDB
 app.get("/images", async (req, res) => {
